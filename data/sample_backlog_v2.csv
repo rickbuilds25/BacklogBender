@@ -1,0 +1,16 @@
+Task,Impact,Effort,Notes
+Improve onboarding flow,,2,Drop-off at step 2 of sign-up
+Add audit logging,,3,Enterprise ask
+Revamp dashboard UI,,5,Current UI feels outdated
+Fix mobile layout bugs,,2,Reported by multiple users
+Enable 2FA login,,4,Security must-have
+Clean unused API endpoints,,1,Quick win
+Refactor billing module,,6,Tech debt since Q2
+Launch referral program,,5,Growth team initiative
+Add changelog feature,,3,Dev wants release transparency
+Implement dark mode,,4,User community vote
+Auto-assign tasks to engineers,,2,Ops request
+Run performance audit,,2,Targeting load time <2s
+Migrate to new auth provider,,7,Vendor change forced
+Segment power users,,3,Needed for CRM personalization
+Set up alerts for failed payments,,2,Spike in churn
