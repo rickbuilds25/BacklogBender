@@ -1,0 +1,43 @@
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Environments
+.env
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# VSCode files
+.vscode/
+
+# Mac system files
+.DS_Store
+
+# Logs and debug
+*.log
+
+# Streamlit cache
+.streamlit/
+
+# Python virtualenvs and pycache
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+pip-wheel-metadata/
+*.pyo
+*.pyd
+*.pdb
+
+# Notion API credentials (if applicable)
+notion_token.json
