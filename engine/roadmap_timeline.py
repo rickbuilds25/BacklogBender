@@ -17,7 +17,7 @@ label_priority = {
 }
 
 def build_timeline_roadmap(csv_path):
-    print("\n📆 Generating sprint-based timeline roadmap...")
+    print("\n📆 Generating sprint-wise timeline roadmap...")
 
     df = pd.read_csv(csv_path)
     df["Priority"] = df["Label"].map(label_priority).fillna(99)  # fallback for unknown labels
@@ -46,7 +46,7 @@ def build_timeline_roadmap(csv_path):
         used += effort
 
     # Build markdown output
-    md = "# 🗓️ Timeline Roadmap (Velocity-aware)\n\n"
+    md = "# 🗓️ Sprint-wise Roadmap (Velocity-aware)\n\n"
     for sprint, tasks in timeline.items():
         md += f"## {sprint}\n"
         for task, label in tasks:
@@ -66,5 +66,5 @@ def build_timeline_roadmap(csv_path):
     with open(out_path, "w") as f:
         f.write(md)
 
-    print(f"✅ Timeline roadmap saved to: {out_path}\n")
+    print(f"✅ Sprint-wise timeline roadmap saved to: {out_path}\n")
     return out_path

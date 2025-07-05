@@ -57,25 +57,22 @@ pip install -r requirements.txt
 
 ---
 
-## 🧪 How to Run
+## 🧪 How to Run (Unified Flow)
 
-### Step 1: Score the backlog
+### Step 1: Run the agent
 ```bash
-python3 -c "from engine.scoring import score_backlog; score_backlog('data/sample_backlog_scored.csv')"
+python3 main.py
 ```
-- Produces: `outputs/scored_backlog_<timestamp>.csv`
+This will:
+- Parse and match tasks to goals
+- Score them with RICE (or use manual override)
+- Label tasks based on scoring rules
+- Export:
+  - Scored CSV
+  - Priority-based roadmap
+  - Timeline roadmap (based on sprint velocity)
 
-### Step 2: Generate label-based roadmap
-```bash
-python3 -c "from engine.roadmap_builder import build_roadmap; build_roadmap('outputs/scored_backlog_<timestamp>.csv')"
-```
-- Produces: `outputs/roadmap_<timestamp>.md`
-
-### Step 3: Generate timeline-based roadmap
-```bash
-python3 -c "from engine.roadmap_timeline import build_timeline_roadmap; build_timeline_roadmap('outputs/scored_backlog_<timestamp>.csv')"
-```
-- Produces: `outputs/roadmap_timeline_<timestamp>.md`
+All outputs go to the `outputs/` folder.
 
 ---
 
@@ -87,6 +84,19 @@ python3 -c "from engine.roadmap_timeline import build_timeline_roadmap; build_ti
 🌱 Nice-to-Have: 200
 🔮 Future: 75
 🧪 Optional: 0
+```
+
+### `data/goals.txt`
+```
+- Reduce churn among power users by 15% through targeted engagement
+- Improve system reliability and reduce incident count by 40%
+- Increase new user activation rate from 55% to 75% in Q3
+```
+
+### `.env`
+```
+OPENAI_API_KEY=your-key-here
+SPRINT_VELOCITY=10
 ```
 
 ---
@@ -129,4 +139,4 @@ python3 -c "from engine.roadmap_timeline import build_timeline_roadmap; build_ti
 
 ---
 
-**Made with 💕 by THE PRODUCT GEEK  |  theproductgeek.club  |  Instagram: @the.productgeek  |  LinkedIn: Arindam Nath**
+**Made with 💕 by [THE PRODUCT GEEK](https://theproductgeek.club)  |  [Instagram: @the.productgeek](https://www.instagram.com/the.productgeek)  |  [LinkedIn: Arindam Nath](https://www.linkedin.com/in/arindam-nath/)**
