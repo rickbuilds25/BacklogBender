@@ -1,0 +1,9 @@
+[THRESHOLDS]
+Must-Have = 400
+Nice-to-Have = 200
+Future = 0
+
+[LABELS]
+Must-Have = 🚀 Must-Have
+Nice-to-Have = 🌱 Nice-to-Have
+Future = 🔮 Future
