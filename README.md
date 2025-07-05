@@ -1,111 +1,132 @@
-# 📦 Backlog Bender v1.0
+## 📦 Backlog Bender v1.0
 
-> An AI agent that turns messy backlogs into clean, prioritized, timeline-ready roadmaps.
+An AI agent that turns messy backlogs into clean, prioritized, timeline-ready roadmaps
 
-Built for product managers who are tired of spreadsheets, sticky notes, and decision fatigue.
+Built for PMs who are tired of juggling vague tasks, shifting stakeholder demands, and never-ending backlogs — this agent helps you bring **focus, structure, and clarity** to your product planning.
 
----
+> “It’s not about doing more. It’s about knowing what not to do.” — Some Jobsian wisdom 🧘
 
-## 🧠 What It Does
-
-Backlog Bender takes in:
-- ✅ Your product goals or OKRs (as `.txt` or `.docx`)
-- ✅ A raw backlog (`.csv`) with tasks and effort only
-
-And gives you:
-- 📊 AI-assisted Impact scores based on your goals
-- 📂 Grouped tasks by Now / Next / Later
-- 🏷 MoSCoW tags (Must, Should, Could, Won’t)
-- 🗓 A clean roadmap in Markdown, CSV, and plaintext formats
+Backlog Bender blends AI intelligence with product intuition. It lets you:
+- Tie every task to an actual product goal
+- Cut through the noise of ‘everything feels important’
+- Ship roadmaps that feel like strategy, not to-do lists
 
 ---
 
-## 🚀 How to Use
+## 🚀 What It Does
 
-```bash
-# Step 1: Clone the repo
-$ git clone https://github.com/rickbuilds25/BacklogBender.git
-$ cd BacklogBender
+1. **🧾 Parses Backlog**: Accepts CSVs with tasks and optional effort values.
+2. **📌 Connects to Goals**: Uses your product OKRs to estimate task impact.
+3. **🧠 Embedding-Driven Relevance**: Matches tasks to goals using OpenAI embeddings.
+4. **📊 Scores with RICE**: Calculates or overrides RICE scores using Reach, Impact, Confidence, Effort.
+5. **🏷️ Labels Automatically**: Categorizes tasks as Must-Have, Nice-to-Have, Future, Optional based on rules.
+6. **📋 Generates Output**:
+   - Scored CSV with labels
+   - Priority-based markdown roadmap
+   - Timeline-aware sprint roadmap
 
-# Step 2: Drop your input files
-- Place your backlog CSV into `data/sample_backlog_v2.csv`
-- Place your goals file into `data/goals.txt`
+---
 
-# Step 3: Run the agent
-$ python main.py --backlog data/sample_backlog_v2.csv --goals data/goals.txt
+## 📥 Inputs
 
-# Step 4: Check your roadmap in `output/`
+### `data/sample_backlog_scored.csv`
+- Required columns: `Task`, `Effort`
+- Optional columns: `Reach`, `Confidence`, `ManualScore`
+
+### `data/goals.txt`
+- Each line is one product goal / OKR.
+
+### `.env`
 ```
-
----
-
-## 📅 Input Format
-
-### sample_backlog_v2.csv
-| Task | Impact | Effort | Notes |
-|------|--------|--------|-------|
-| Add audit logging | (leave blank) | 3 | Enterprise ask |
-
-> ⚠️ *Impact is auto-generated based on alignment to your goals.*
-> 
-> Tasks with vague descriptions will trigger a warning and may score low.
-
-### goals.txt
+OPENAI_API_KEY=your-key-here
+SPRINT_VELOCITY=10
 ```
-- Increase new user activation rate from 55% to 75% in Q3
-- Improve system reliability and reduce incident count by 40%
-- Launch enterprise-readiness features to support 3 upcoming sales demos
-- Reduce churn among power users by 15% through targeted engagement
-- Improve security posture and achieve SOC 2 readiness by end of quarter
-```
-
----
-
-## 🧩 Modules (Jira Linked)
-
-| Module | Jira Task | Description |
-|--------|-----------|-------------|
-| `parser/backlog_parser.py` | AABB-5 | Parse backlog, compute AI impact from goals |
-| `engine/scoring.py` | AABB-6 | RICE/ICE priority scoring |
-| `engine/dependency_mapper.py` | AABB-7 | Analyze task dependencies |
-| `engine/roadmap_builder.py` | AABB-8 | Build grouped roadmap |
-| `ui/exporter.py` | AABB-9 | Export roadmap to MD, CSV, TXT |
-| `engine/velocity_planner.py` | AABB-10 | Optional: capacity-aware planning |
-| `utils/jira_sync.py` | AABB-11 | Optional: Sync to Jira |
 
 ---
 
 ## 🛠 Requirements
-- Python 3.10+
-- See `requirements.txt` for dependencies
 
-Install with:
+- Python 3.8+
+- `openai`, `pandas`, `scikit-learn`, `python-dotenv`
+- A valid OpenAI API key
+
+Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
+## 🧪 How to Run
+
+### Step 1: Score the backlog
+```bash
+python3 -c "from engine.scoring import score_backlog; score_backlog('data/sample_backlog_scored.csv')"
+```
+- Produces: `outputs/scored_backlog_<timestamp>.csv`
+
+### Step 2: Generate label-based roadmap
+```bash
+python3 -c "from engine.roadmap_builder import build_roadmap; build_roadmap('outputs/scored_backlog_<timestamp>.csv')"
+```
+- Produces: `outputs/roadmap_<timestamp>.md`
+
+### Step 3: Generate timeline-based roadmap
+```bash
+python3 -c "from engine.roadmap_timeline import build_timeline_roadmap; build_timeline_roadmap('outputs/scored_backlog_<timestamp>.csv')"
+```
+- Produces: `outputs/roadmap_timeline_<timestamp>.md`
+
+---
+
+## ⚙️ Configs
+
+### `config/scoring_rules.txt`
+```
+🚀 Must-Have: 400
+🌱 Nice-to-Have: 200
+🔮 Future: 75
+🧪 Optional: 0
+```
+
+---
+
 ## 🧪 Sample Output
-Outputs go into the `output/` folder and include:
-- `roadmap.md`
-- `prioritized_backlog.csv`
-- `summary.txt`
+
+### 🗓️ Timeline Roadmap (Velocity-aware)
+
+```
+## Sprint 1
+- [ ] Auto-assign tasks to engineers (🚀 Must-Have)
+- [ ] Run performance audit (🚀 Must-Have)
+- [ ] Clean unused API endpoints (🚀 Must-Have)
+- [ ] Set up alerts for failed payments (🚀 Must-Have)
+- [ ] Refactor billing module (🚀 Must-Have)
+
+## Sprint 2
+- [ ] Add changelog feature (🚀 Must-Have)
+- [ ] Migrate to new auth provider (🌱 Nice-to-Have)
+- [ ] Add audit logging (🌱 Nice-to-Have)
+- [ ] Improve onboarding flow (🌱 Nice-to-Have)
+- [ ] Fix mobile layout bugs (🌱 Nice-to-Have)
+
+## Sprint 3
+- [ ] Implement dark mode (🌱 Nice-to-Have)
+- [ ] Enable 2FA login (🌱 Nice-to-Have)
+- [ ] Revamp dashboard UI (🔮 Future)
+- [ ] Launch referral program (🔮 Future)
+
+## Sprint 4
+- [ ] Segment power users (🔮 Future)
+```
 
 ---
 
-## 🧠 Why We Built This
-Because PMs should spend less time cleaning backlogs and more time shipping real product work. Backlog Bender is part of a growing suite of AI agents under **The Product Geek**.
+## 🧠 AI Inside
 
-> PMs deserve better tools. So we’re building them.
-
----
-
-## 👨‍💻 Author
-**Arindam (a.k.a RickBuilds25)**  
-[@the.productgeek](https://www.instagram.com/the.productgeek) on Instagram
+- Uses `text-embedding-3-small` to match tasks to goals.
+- Warns users when task descriptions are too vague to embed.
 
 ---
 
-## 🛡 License
-MIT
+**Made with 💕 by THE PRODUCT GEEK  |  theproductgeek.club  |  Instagram: @the.productgeek  |  LinkedIn: Arindam Nath**
