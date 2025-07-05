@@ -1,0 +1,16 @@
+Task,Reach,Impact,Confidence,Effort,ManualScore,RICE Score
+Improve onboarding flow,100,5.0,0.7,1.0,,350.0
+Add audit logging,110,6.5,0.8,1.5,,381.33
+Revamp dashboard UI,120,8.0,0.9,2.0,75.0,75.0
+Fix mobile layout bugs,130,5.0,1.0,2.5,,260.0
+Enable 2FA login,140,6.5,0.7,3.0,,212.33
+Clean unused API endpoints,150,8.0,0.8,1.0,,960.0
+Refactor billing module,160,5.0,0.9,1.5,,480.0
+Launch referral program,170,6.5,1.0,2.0,75.0,75.0
+Add changelog feature,180,8.0,0.7,2.5,,403.2
+Implement dark mode,190,5.0,0.8,3.0,,253.33
+Auto-assign tasks to engineers,200,6.5,0.9,1.0,,1170.0
+Run performance audit,210,8.0,1.0,1.5,,1120.0
+Migrate to new auth provider,220,5.0,0.7,2.0,,385.0
+Segment power users,230,6.5,0.8,2.5,75.0,75.0
+Set up alerts for failed payments,240,8.0,0.9,3.0,,576.0
